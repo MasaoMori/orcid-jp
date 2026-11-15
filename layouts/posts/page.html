@@ -1,0 +1,21 @@
+{{ define "main" }}
+<article class="post hentry">
+  <header class="entry-header">
+    <h1 class="entry-title">{{ .Title }}</h1>
+    {{ if ne site.Params.accelerate.show_post_dates false }}<p class="entry-meta"><time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006年01月02日" }}</time>{{ with .Params.author }} · {{ . }}{{ end }}</p>{{ end }}
+  </header>
+  <div class="entry-content clearfix">{{ partial "content.html" .Content }}</div>
+  {{- /* Jekyll と同じく previous = 1つ古い記事、next = 1つ新しい記事 */}}
+  {{- $posts := (partial "posts.html" .).Reverse }}
+  {{- $prev := false }}{{ $next := false }}{{ $hit := false }}
+  {{- range $posts }}
+    {{- if $hit }}{{ if not $next }}{{ $next = . }}{{ end }}
+    {{- else if eq .RelPermalink $.RelPermalink }}{{ $hit = true }}
+    {{- else }}{{ $prev = . }}{{ end }}
+  {{- end }}
+  <nav class="post-navigation" aria-label="前後のお知らせ">
+    {{ with $prev }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
+    {{ with $next }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+  </nav>
+</article>
+{{ end }}

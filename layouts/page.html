@@ -1,0 +1,6 @@
+{{ define "main" }}
+<article class="page hentry">
+  {{ if not .Params.hide_title }}<header class="entry-header"><h1 class="entry-title">{{ .Title }}</h1></header>{{ end }}
+  <div class="entry-content clearfix">{{ partial "content.html" .Content }}</div>
+</article>
+{{ end }}

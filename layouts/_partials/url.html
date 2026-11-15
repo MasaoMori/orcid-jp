@@ -1,0 +1,7 @@
+{{- /* サイト内パス（先頭 /）に baseURL のサブパスを付けます。外部URL等はそのまま。 */ -}}
+{{- $t := . | default "/" -}}
+{{- if or (strings.Contains $t "://") (hasPrefix $t "//") (hasPrefix $t "#") (hasPrefix $t "mailto:") (hasPrefix $t "tel:") (hasPrefix $t "data:") -}}
+  {{- $t -}}
+{{- else -}}
+  {{- strings.TrimPrefix "/" $t | relURL -}}
+{{- end -}}

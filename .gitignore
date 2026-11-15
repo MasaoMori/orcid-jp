@@ -1,0 +1,18 @@
+# Hugo生成ファイル
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# WordPressバックアップ
+**/backwpup/
+**/backups/
+**/backwpup-restore/
+**/backwpup-restore-*/
+**/backwpup-*/
+*.sql
+*.tar
+*.tar.gz
+*.zip
+
+# macOS
+.DS_Store

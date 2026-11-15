@@ -1,0 +1,8 @@
+{{- /* navigation.yaml が空のとき：ホーム＋固定ページ（nav_exclude を除く）を自動表示 */ -}}
+<li{{ if .IsHome }} class="current-menu-item"{{ end }}><a href="{{ site.Home.RelPermalink }}"{{ if .IsHome }} aria-current="page"{{ end }}>ホーム</a></li>
+{{- range (where site.RegularPages "Section" "pages").ByParam "nav_order" }}
+  {{- if and .Title (ne .Params.nav_exclude true) }}
+  {{- $current := eq .RelPermalink $.RelPermalink }}
+  <li{{ if $current }} class="current-menu-item"{{ end }}><a href="{{ .RelPermalink }}"{{ if $current }} aria-current="page"{{ end }}>{{ or .Params.nav_title .Title }}</a></li>
+  {{- end }}
+{{- end }}

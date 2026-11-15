@@ -1,0 +1,8 @@
+{{- /* 本文中の href/src/poster="/..." に baseURL のサブパスを付けます（Jekyll版 content.html 相当）。 */ -}}
+{{- $base := strings.TrimSuffix "/" (urls.Parse site.BaseURL).Path -}}
+{{- $html := string . -}}
+{{- if $base -}}
+  {{- $html = replaceRE `(\s(?:href|src|poster))="/"` (printf `${1}="%s/"` $base) $html -}}
+  {{- $html = replaceRE `(\s(?:href|src|poster))="/([^/"])` (printf `${1}="%s/${2}` $base) $html -}}
+{{- end -}}
+{{- $html | safeHTML -}}

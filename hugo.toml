@@ -1,0 +1,37 @@
+baseURL = "https://masaomori.github.io/orcid-jp/"
+languageCode = "ja"
+defaultContentLanguage = "ja"
+title = "ORCID Japan Consortium"
+timeZone = "Asia/Tokyo"
+hasCJKLanguage = true
+summaryLength = 120
+enableRobotsTXT = false
+
+# Jekyll版にはカテゴリー別一覧・セクション一覧・RSSがなかったため生成しません。
+disableKinds = ["taxonomy", "term", "section", "rss"]
+
+[markup.goldmark.renderer]
+  # 本文中のHTML（iframe等）をそのまま出力します。
+  unsafe = true
+
+[params]
+  description = "ORCID日本コンソーシアム公式サイト"
+
+[params.accelerate]
+  # boxed / wide
+  width = "boxed"
+  # 空欄なら文字のサイト名だけを表示します。パスには baseURL のサブパスを含めません。
+  logo = ""
+  logo_alt = "ORCID日本コンソーシアム"
+  header_image = ""
+  header_image_alt = ""
+  sidebar = true
+  sidebar_title = "サイト案内"
+  sidebar_text = ""
+  footer_text = ""
+  show_post_dates = true
+  home_posts_limit = 10
+
+[frontmatter]
+  # date を省略した投稿は、ファイル名の先頭の日付（YYYY-MM-DD-）を公開日にします（Jekyll と同じ動作）。
+  date = [":default", ":filename"]

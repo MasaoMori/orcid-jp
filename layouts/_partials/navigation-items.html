@@ -1,0 +1,12 @@
+{{- $page := .page }}
+{{- range .items }}
+  {{- $url := partial "url.html" .url }}{{ $title := .title }}
+  {{- $current := eq ($page.RelPermalink | urls.PathUnescape) ($url | urls.PathUnescape) }}
+  <li class="menu-item{{ if $current }} current-menu-item{{ end }}{{ if .children }} menu-item-has-children{{ end }}">
+    <a href="{{ $url }}"{{ if .new_tab }} target="_blank" rel="noopener noreferrer"{{ end }}{{ if $current }} aria-current="page"{{ end }}>{{ .title }}</a>
+    {{- with .children }}
+      <button type="button" class="submenu-toggle" aria-expanded="false" aria-label="{{ $title }}のサブメニュー">⌄</button>
+      <ul class="sub-menu">{{ partial "navigation-items.html" (dict "items" . "page" $page) }}</ul>
+    {{- end }}
+  </li>
+{{- end }}

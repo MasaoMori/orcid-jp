@@ -1,0 +1,4 @@
+{{- /* 新しい順の投稿一覧。同じ日付はファイル（フォルダ）名の降順（Jekyll の site.posts と同じ並び） */ -}}
+{{- $posts := where site.RegularPages "Section" "posts" -}}
+{{- $posts = sort $posts "File.Path" "desc" -}}
+{{- return sort $posts "Date" "desc" -}}

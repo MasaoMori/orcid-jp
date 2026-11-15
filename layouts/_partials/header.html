@@ -1,0 +1,26 @@
+<header id="masthead" class="site-header clearfix">
+  <div id="header-text-nav-container" class="clearfix">
+    <div class="inner-wrap">
+      <div id="header-text-nav-wrap" class="clearfix">
+        <div id="header-left-section">
+          {{ with site.Params.accelerate.logo }}
+          <div id="header-logo-image"><a href="{{ site.Home.RelPermalink }}"><img src="{{ partial "url.html" . }}" alt="{{ site.Params.accelerate.logo_alt }}"></a></div>
+          {{ end }}
+          <div id="header-text">
+            <p id="site-title"><a href="{{ site.Home.RelPermalink }}" rel="home">{{ site.Title }}</a></p>
+            <p id="site-description">{{ site.Params.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{ with site.Params.accelerate.header_image }}
+    <img class="header-image" src="{{ partial "url.html" . }}" alt="{{ site.Params.accelerate.header_image_alt }}">
+    {{ end }}
+    <nav id="site-navigation" class="main-navigation inner-wrap clearfix" aria-label="メインメニュー">
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">メニュー</button>
+      <ul id="primary-menu" class="nav-menu">
+        {{ with site.Data.navigation.primary }}{{ partial "navigation-items.html" (dict "items" . "page" $) }}{{ else }}{{ partial "auto-navigation.html" . }}{{ end }}
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,18 @@
+{{ define "main" }}
+<article class="page hentry">
+  {{ if not .Params.hide_title }}<header class="entry-header"><h1 class="entry-title">{{ .Title }}</h1></header>{{ end }}
+  <div class="entry-content clearfix">{{ partial "content.html" .Content }}
+<section class="home-posts" aria-labelledby="news-title">
+  <h2 id="news-title">お知らせ</h2>
+  {{- $limit := site.Params.accelerate.home_posts_limit | default 10 }}
+  {{- $posts := partial "posts.html" . }}
+  {{- range first $limit $posts }}
+  <article class="news-item">
+    {{ if ne site.Params.accelerate.show_post_dates false }}<time datetime="{{ .Date.Format "2006-01-02T15:04:05-07:00" }}">{{ .Date.Format "2006年01月02日" }}</time>{{ end }}
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p>{{ .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | strings.TrimSpace | truncate 160 }}</p>
+  </article>
+  {{- else }}<p class="empty-news">お知らせはまだありません。</p>{{ end }}
+</section></div>
+</article>
+{{ end }}

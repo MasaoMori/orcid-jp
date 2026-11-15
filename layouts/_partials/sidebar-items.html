@@ -1,0 +1,13 @@
+{{- $page := .page }}
+{{- range .items }}
+<li>
+  {{- if .url }}
+    {{- $url := partial "url.html" .url }}
+    {{- $current := eq ($page.RelPermalink | urls.PathUnescape) ($url | urls.PathUnescape) }}
+    <a href="{{ $url }}"{{ if .new_tab }} target="_blank" rel="noopener noreferrer"{{ end }}{{ if $current }} aria-current="page"{{ end }}>{{ .title }}</a>
+  {{- else }}
+    <span class="sidebar-group-title">{{ .title }}</span>
+  {{- end }}
+  {{- with .children }}<ul>{{ partial "sidebar-items.html" (dict "items" . "page" $page) }}</ul>{{ end }}
+</li>
+{{- end }}

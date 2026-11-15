@@ -1,0 +1,10 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $title := .Title }}{{ if eq .Kind "404" }}{{ $title = "ページが見つかりません" }}{{ end }}
+<title>{{ with $title }}{{ . }} | {{ end }}{{ site.Title }}</title>
+<meta name="description" content="{{ or .Params.description site.Params.description | plainify | replaceRE `\s+` " " | strings.TrimSpace }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<link rel="stylesheet" href="{{ "assets/accelerate/vendor/style.css" | relURL }}">
+<link rel="stylesheet" href="{{ "assets/accelerate/vendor/fontawesome/css/font-awesome.min.css" | relURL }}">
+<link rel="stylesheet" href="{{ "assets/accelerate/css/jekyll.css" | relURL }}?v={{ now.Unix }}">
+<script src="{{ "assets/accelerate/js/site.js" | relURL }}" defer></script>

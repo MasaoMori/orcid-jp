@@ -1,0 +1,27 @@
+<aside id="secondary" aria-label="サイドバー">
+  <section class="widget widget_pages">
+    <h2 class="widget-title">{{ site.Params.accelerate.sidebar_title | default "サイト案内" }}</h2>
+    <ul>{{ with site.Data.navigation.sidebar }}{{ partial "sidebar-items.html" (dict "items" . "page" $) }}{{ else }}{{ partial "auto-navigation.html" . }}{{ end }}</ul>
+  </section>
+  {{- $posts := partial "posts.html" . }}
+  {{- if $posts }}
+  <section class="widget widget_yearly_posts">
+    <h2 class="widget-title">投稿一覧</h2>
+    {{- $years := slice }}{{ range $posts }}{{ $years = $years | append (.Date.Format "2006") }}{{ end }}
+    {{- range uniq $years }}{{ $y := . }}
+    {{- $items := where $posts "Date.Year" (int $y) }}
+    <details class="post-year">
+      <summary>{{ $y }}年（{{ len $items }}件）</summary>
+      <ul>
+        {{- range $items }}
+        <li><a href="{{ .RelPermalink }}"{{ if eq .RelPermalink $.RelPermalink }} aria-current="page"{{ end }}>{{ .Title }}</a></li>
+        {{- end }}
+      </ul>
+    </details>
+    {{- end }}
+  </section>
+  {{- end }}
+  {{ with site.Params.accelerate.sidebar_text }}
+  <section class="widget"><div class="textwidget">{{ . | htmlEscape | replaceRE "\n" "<br>" | safeHTML }}</div></section>
+  {{ end }}
+</aside>

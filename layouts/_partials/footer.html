@@ -1,0 +1,11 @@
+<footer id="colophon" class="clearfix">
+  <div class="footer-socket-wrapper clearfix"><div class="inner-wrap"><div class="footer-socket-area clearfix">
+    <div class="copyright">
+      <p>© {{ now.Year }} {{ site.Title }}</p>
+      {{ with site.Params.accelerate.footer_text }}<p>{{ . }}</p>{{ end }}
+      <p class="theme-credit">Theme: <a href="https://themegrill.com/themes/accelerate/">Accelerate</a> by ThemeGrill · Adapted for Hugo</p>
+    </div>
+    {{ with site.Data.navigation.footer }}<nav class="footer-menu" aria-label="フッターメニュー"><ul>{{ partial "sidebar-items.html" (dict "items" . "page" $) }}</ul></nav>{{ end }}
+  </div></div></div>
+</footer>
+<a href="#masthead" id="scroll-up" aria-label="ページの先頭へ">↑</a>
